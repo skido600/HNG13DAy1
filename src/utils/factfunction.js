@@ -1,3 +1,4 @@
+// helper function
 const fetchfact = async (url) => {
   const fact = await fetch(url, {
     method: "GET",
