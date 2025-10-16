@@ -1,15 +1,21 @@
 // helper function
 const fetchfact = async (url) => {
-  const fact = await fetch(url, {
-    method: "GET",
-    "Content-type": "application/json",
-  });
-  const factResponse = await fact.json();
-  console.log(factResponse);
-  if (!fact.ok) {
-    throw new Error("error fetching fact");
+  try {
+    const fact = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const factResponse = await fact.json();
+
+    if (!fact.ok) {
+      throw new Error("error fetching fact");
+    }
+    return factResponse.fact;
+  } catch (error) {
+    throw new Error(error);
   }
-  return factResponse.fact;
 };
 
 export { fetchfact };
