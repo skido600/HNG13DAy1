@@ -10,7 +10,7 @@ const fetchfact = async (url) => {
     const factResponse = await fact.json();
 
     if (!fact.ok) {
-      throw new Error("error fetching fact");
+      throw new Error("error fetching facts");
     }
     return factResponse.fact;
   } catch (error) {

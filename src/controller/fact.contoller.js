@@ -1,6 +1,6 @@
 import { fetchfact } from "../utils/factfunction.js";
 
-const factController = async (_req, res) => {
+const factController = async (_req, res, next) => {
   try {
     const fact = await fetchfact("https://catfact.ninja/fact");
 
@@ -16,16 +16,13 @@ const factController = async (_req, res) => {
       fact,
     });
   } catch (error) {
-    if (error.message === "error fetching fact") {
-      res.status(500).json({
+    if (error.message === "error fetching facts") {
+      res.status(404).json({
         status: "false",
         message: error.messsage || "internal server error",
       });
     } else {
-      res.status(500).json({
-        status: "false",
-        message: error.messsage,
-      });
+      next(error);
     }
   }
 };
